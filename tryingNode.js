@@ -6,7 +6,7 @@ var express = require('express');
 const db = mysql.createConnection({
     host: "localhost",
     user: "atharva",
-    password: "aaaAAA2#",
+    password: "password",
     database: "cardatabse"
   });
 
@@ -17,24 +17,24 @@ db.connect((err)=>{
   console.log('MySql connected');
 })
 
+let sqlQ = 'USE cardatabse';
+db.query(sqlQ , (err,result) =>{
+  console.log(result);
+});
+
 const app = express()
+
+app.get('/',(req,res) => { 
+  res.render('../dbms-frontend/home')
+})
+
+
 
 app.get('/getdatabases', (req,res) => {
   
-  let sqlQ = 'USE cardatabse';
-  db.query(sqlQ , (err,result) =>{
-    // console.log(result);
-    // res.send('look in console')
-  });
-
-  let sqlQ1 = "Insert into driver_details values('D002', 'HARISH KALE', STR_TO_DATE('06-01-1987', '%m-%d-%Y'), 'BANER HOMES, BANER', 'MH12KL1365', STR_TO_DATE('06-01-2019', '%m-%d-%Y'));";
+  // let sqlQ1 = "Insert into driver_details values('D002', 'HARISH KALE', STR_TO_DATE('06-01-1987', '%m-%d-%Y'), 'BANER HOMES, BANER', 'MH12KL1365', STR_TO_DATE('06-01-2019', '%m-%d-%Y'));";
   // let sqlQ1 = 'select * from driver_details'
   db.query(sqlQ1 , (err,result) =>{
-    // if(err){
-    //   throw err;
-    // }
-    // console.log(result);
-
     res.send(err)
   });
 });
