@@ -28,7 +28,12 @@ app.get('/',(req,res) => {
   res.render('../dbms-frontend/home')
 })
 
-
+app.get('/billing',(req,res) => {
+  let sqlQ1 = "Insert into driver_details values({0})".format(req.body)
+  db.query(sqlQ1 , (err,result) =>{
+    res.send(err)
+  });
+});
 
 app.get('/getdatabases', (req,res) => {
   
